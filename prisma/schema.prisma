@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+}
+
+model Dispositivo {
+  dispositivoId Int @id @default(autoincrement()) @map("dispositivo_id")
+  dispositivoNome String @db.VarChar(255) @map("dispositivo_nome")
+  dispositivoSessao String? @db.LongText @map("dispositivo_sessao")
+  dispositivoQrcode String? @db.Text @map("dispositivo_qrcode")
+  dispositivoStatus String? @db.VarChar(255) @map("dispositivo_status")
+  dispositivoTentativas Int? @db.Int @map("dispositivo_tentativas")
+
+  @@map("dispositivo")
+}
+
+model Mensagem {
+  mensagemId String @id @unique @map("mensagem_id")
+  mensagemJid String? @db.VarChar(255) @map("mensagem_jid")
+  mensagemNome String? @db.VarChar(255) @map("mensagem_nome")
+  mensagemCorpo String? @db.Text @map("mensagem_corpo")
+
+  @@map("mensagem")
+}
